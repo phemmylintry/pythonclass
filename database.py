@@ -10,7 +10,7 @@ import os
 import validation
 
 user_db_path = "data/user_record/"
-auth_session_path = "data/auth_session"
+auth_session_path = "data/auth_session/"
 
 
 def create(user_account_number, first_name, last_name, email, password):
@@ -157,3 +157,20 @@ def authenticated_user(account_number, password):
     return False
 
 
+def login_auth_session(account_number, user_details):
+    
+    data = user_details[0] + " " + user_details[1] + " logged in."
+
+    try:
+        f = open(auth_session_path + str(account_number) + ".txt", "x")
+    
+    except FileExistsError:
+        f = open(auth_session_path + str(account_number) + ".txt", "w")
+
+    else:
+        f.write(data)
+    
+    finally:
+        f.close()
+
+    return True

@@ -47,9 +47,10 @@ def login():
 
         password = getpass("What is your password \n")
 
-        user = database.authenticated_user(account_number_from_user, password);
+        user = database.authenticated_user(account_number_from_user, password)
 
         if user:
+            database.login_auth_session(account_number_from_user, user)
             bank_operation(user)
 
         print('Invalid account or password')
@@ -137,6 +138,7 @@ def deposit_operation(user):
     # get current balance
     # get amount to deposit
     # add deposited amount to current balance
+    # update the user file with the new balance
     # display current balance
 
 
@@ -153,6 +155,7 @@ def get_current_balance(user_details):
 
 
 def logout():
+    
     login()
 
 
